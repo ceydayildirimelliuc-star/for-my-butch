@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>🕷️ Sana Bir Sorum Var</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#d40000;
+  --blue:#0055ff;
+  --black:#0b0b0b;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0,85,255,.25), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(212,0,0,.25), transparent 45%),
+    linear-gradient(135deg, #000, #0b0b0b 40%, #000);
+  font-family:'Bangers', system-ui;
+  color:white;
+}
+
+/* Web (örümcek ağı) hissi */
+.web{
+  position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 1px, transparent 1px 18px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.04) 0 1px, transparent 1px 18px);
+  pointer-events:none;
+}
+
+.card{
+  position:relative;
+  background:linear-gradient(160deg, #111, #000);
+  border-radius:24px;
+  padding:36px 56px;
+  box-shadow:0 30px 70px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.06);
+  text-align:center;
+  animation:pop 1s ease;
+}
+
+h1{
+  margin:0 0 14px;
+  font-size:3rem;
+  letter-spacing:2px;
+  color:var(--red);
+  text-shadow:0 3px 0 #000, 0 0 18px rgba(212,0,0,.5);
+}
+
+p{
+  min-height:64px;
+  font-size:2rem;
+  color:#eaeaea;
+}
+
+.btn{
+  margin-top:16px;
+  padding:12px 28px;
+  font-size:1.4rem;
+  border-radius:999px;border:none;cursor:pointer;
+  transition:transform .15s, box-shadow .15s, background .2s;
+  box-shadow:0 10px 0 rgba(0,0,0,.6);
+}
+.btn:hover{transform:translateY(-2px)}
+#start{background:var(--blue);color:white}
+#start:hover{background:#2b7cff}
+
+.buttons{display:none;gap:16px;justify-content:center;margin-top:18px}
+.yes{background:var(--red);color:white}
+.no{background:#555;color:white;position:relative}
+
+/* Kalpler yerine ağ damlacıkları */
+.drop{
+  position:absolute; top:-10vh;
+  font-size:18px; opacity:.7;
+  animation:fall linear infinite;
+}
+@keyframes fall{to{transform:translateY(110vh)}}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+
+/* Lezbiyen bayrağı overlay */
+.flag{
+  position:absolute; inset:0;
+  display:none; align-items:center; justify-content:center;
+  background:
+    linear-gradient(#d52d00 0 16.6%, #ef7627 16.6% 33.2%, #ff9a56 33.2% 49.8%,
+                    #ffffff 49.8% 66.4%, #d162a4 66.4% 83%, #b55690 83% 100%);
+  animation:reveal .8s ease forwards;
+}
+@keyframes reveal{from{opacity:0}to{opacity:1}}
+.flag h2{
+  color:#000; font-size:3rem;
+  background:rgba(255,255,255,.75);
+  padding:12px 24px;border-radius:14px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="web"></div>
+
+<div class="card">
+  <h1>🕷️ SANA BİR SORUM VAR</h1>
+  <p id="text"></p>
+  <button id="start" class="btn" onclick="start()">Hazırım ✨</button>
+
+  <div id="buttons" class="buttons">
+    <button class="btn yes" onclick="yes()">EVET ❤️</button>
+    <button class="btn no" onmouseover="moveNo()">HAYIR 🙈</button>
+  </div>
+
+  <div id="flag" class="flag">
+    <h2>🧡🤍💖 EVET! 💖🤍🧡</h2>
+  </div>
+</div>
+
+<script>
+const messages = [
+  "ilysm my baby 💕",
+  "Benimle çıkar mısın? 🕷️❤️💙"
+];
+let i=0;
+
+function start(){
+  document.getElementById('start').style.display='none';
+  show();
+}
+function show(){
+  if(i<messages.length){
+    document.getElementById('text').innerText=messages[i++];
+    setTimeout(show,1800);
+  }else{
+    document.getElementById('buttons').style.display='flex';
+  }
+}
+function yes(){
+  document.getElementById('buttons').style.display='none';
+  document.getElementById('text').innerText="YAAY! 🥹";
+  document.getElementById('flag').style.display='flex';
+}
+function moveNo(){
+  const b=document.querySelector('.no');
+  b.style.position='absolute';
+  b.style.left=Math.random()*80+'%';
+  b.style.top=Math.random()*80+'%';
+}
+
+/* Ağ damlacıkları */
+for(let i=0;i<28;i++){
+  const d=document.createElement('div');
+  d.className='drop';
+  d.innerText='🕸️';
+  d.style.left=Math.random()*100+'vw';
+  d.style.animationDuration=(Math.random()*4+4)+'s';
+  document.body.appendChild(d);
+}
+</script>
+
+</body>
+</html>
